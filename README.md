@@ -58,8 +58,16 @@ The key files in context are:
             +- editors
             |   +- CheckboxesEditor.js      Main editor component logic
             |   +- CheckboxesView.vue       Main editor view
+            +- renderers
+            |   +- CollateralRenderer.js    Custom renderer for the checkboxes output
             +- ...
 ```
+
+Note that the editor / renderer combination uses JSON to store the array of checkbox array results.
+
+We assume this is the only way based on [this post](https://forum.handsontable.com/t/how-to-use-an-array-of-array-of-objects-as-data-source/2812/2) ?
+
+
 
 ## Libraries
 
