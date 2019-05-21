@@ -11,7 +11,7 @@ The code for the editor itself was taken from the link below, as suggested [here
 
 ## Problem
 
-We'd like to understand how to handle focus correctly, using either the button in the editor or the ENTER key, will end editing and pass back focus to the table.
+We'd like to understand how to handle focus correctly, using either the button in the editor or the ENTER key, to end editing and pass back focus to the table. We'd like this to work with single and multiple cell selections.
 
 The original forum post with more detail is here:
 
