@@ -1,15 +1,21 @@
 {
   "name": "checkboxes-demo",
+  "description": "Demo project to fix focus issues with custom editor",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
+    "serve": "npm run dev",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@handsontable/vue": "^4.0.0",
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "element-ui": "^2.8.2",
+    "handsontable": "^7.0.3",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",
@@ -19,6 +25,8 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
   }
 }

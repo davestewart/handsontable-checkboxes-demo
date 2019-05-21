@@ -1,0 +1,94 @@
+// padding + borders
+.handsontable {
+  td, th {
+    border-color: #DCDFE6 !important; // same as element ui
+  }
+
+  td, th {
+    font-size: 0.8rem;
+    line-height: 2rem;
+    padding-left: 8px;
+    padding-right: 8px;
+    vertical-align: middle;
+  }
+
+  textarea.handsontableInput {
+    font-size: 0.8rem;
+    line-height: 2rem;
+    padding-left: 9px;
+    padding-right: 9px !important;
+  }
+
+  // cells
+  .htRight .htAutocompleteArrow {
+    padding-left: 8px;
+  }
+
+  .htRight.highlight,
+  .htRight {
+    padding-right: 8px;
+    text-align: right;
+  }
+
+  // resets
+  .handsontable .autocompleteEditor {
+    textarea,
+    td,
+    th {
+      line-height: 22px;
+      vertical-align: top;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .handsontableInputHolder .handsontable {
+    td,
+    th {
+      line-height: 22px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+}
+
+// headings
+.handsontable {
+
+  th {
+    span.colHeader {
+      font-size: 0.8em;
+      line-break: auto;
+      white-space: initial;
+      vertical-align: middle;
+    }
+  }
+
+}
+
+// cell styling
+.handsontable {
+
+  .htReadOnly {
+    color: grey;
+  }
+
+  .htValue {
+    span.symbol {
+      float: left;
+    }
+    span.value {
+      float: right;
+    }
+  }
+
+
+  .htPercent:after {
+    content: " %";
+    color: #AAA;
+  }
+
+}
+
+.handsontableInputHolder .handsontable {
+
+}

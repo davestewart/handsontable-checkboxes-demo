@@ -1,0 +1,92 @@
+body {
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+form.horizontal,
+form.el-form--inline {
+
+  display: flex;
+  align-items: flex-end;
+
+  .el-form-item__label {
+    padding-left: 8px;
+  }
+}
+
+.el-form-item__label {
+  line-height: inherit;
+  font-weight: bold;
+  padding-bottom: 5px;
+  color: #666;
+}
+
+.icon-link {
+  display: inline-block;
+  font-size: 1.2rem;
+  padding: .2rem;
+  margin: 0 .2rem;
+}
+
+.el-form--inline {
+  display: flex;
+}
+
+table {
+  cursor: default;
+}
+
+.el-message-box {
+  position: relative;
+  vertical-align: inherit;
+  top: -15%;
+}
+
+.heading .el-input__inner {
+  margin: 30px 0 10px;
+  border: 0;
+  // border-bottom: 1px solid #EBEEF5;
+  border-radius: 0;
+  padding: 0 0 2px 10px;
+  height: inherit;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.el-table__body .index {
+  color: #999;
+  font-size: .6rem;
+}
+
+.el-checkbox-group.vertical label {
+  display: block;
+}
+
+.el-radio-group.vertical label {
+  display: block;
+  line-height: 32px;
+}
+
+.el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: auto;
+}
+
+.el-radio-group {
+  user-select: none;
+}
+
+label.el-label {
+  padding: 0 0 10px;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+}
+
+
+p.el-input {
+  padding-left: 15px;
+  line-height: 24px;
+  font-size: 14px;
+}

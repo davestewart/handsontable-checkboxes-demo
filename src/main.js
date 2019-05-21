@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+import './plugins/handsontable'
+import './plugins/element-ui'
+
 Vue.config.productionTip = false
 
 new Vue({
