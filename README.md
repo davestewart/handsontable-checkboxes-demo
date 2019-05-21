@@ -1,9 +1,15 @@
 # Checkboxes Demo
 
 
-## Summary
+## Intro
 
 This project demos a Handsontable [custom editor](https://handsontable.com/docs/7.0.3/tutorial-cell-editor.html).
+
+The code for the editor itself was taken from the link below, as suggested [here](https://forum.handsontable.com/t/select-editor-tutorial-has-bugs/3232/12?u=dave.stewart):
+
+- https://github.com/handsontable/handsontable/blob/master/src/editors/selectEditor.js
+
+## Problem
 
 We'd like to understand how to handle focus correctly, using either the button in the editor or the ENTER key, will end editing and pass back focus to the table.
 
