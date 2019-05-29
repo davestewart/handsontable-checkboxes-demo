@@ -14,12 +14,12 @@ import * as Columns from './config/columns.js'
 import CheckboxesEditor from './editors/CheckboxesEditor'
 import CollateralRenderer from './renderers/CollateralRenderer'
 
-// table
-Vue.component('hot-table', HotTable)
-
 // renderers
 Handsontable.editors.registerEditor('checkboxes', CheckboxesEditor)
 Handsontable.renderers.registerRenderer('collateral', CollateralRenderer)
+
+// table
+Vue.component('hot-table', HotTable)
 
 // settings
 export {
