@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 /**
  * Helper function to make settings object for HOT table
  *
@@ -8,9 +6,7 @@ import Vue from 'vue'
  * @return  {object}
  */
 function make (settings, vm) {
-
   const defaults = {
-
     licenseKey: 'non-commercial-and-evaluation',
 
     // layout
@@ -59,7 +55,6 @@ function make (settings, vm) {
         // append cell classes to editor
         editor.className = 'handsontableInput htPadded ' + cell.className
       }
-
     },
 
     // emit changes

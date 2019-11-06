@@ -3,12 +3,12 @@
   <div @keydown.enter="onEnter"
        @keydown.down.prevent.stop="onDown"
        @keydown.up.prevent.stop="onUp"
+       @keydown.esc="onCancel"
   >
     <el-checkbox-group
       v-model="input"
       class="vertical"
       @input="onInput"
-      @keydown.enter="onEnter"
     >
       <el-checkbox ref="checkbox"
                    v-for="option in options"
@@ -21,7 +21,7 @@
     <hr>
     <div class="button-holder">
       <el-button @click="onEnter" type="primary">Update All</el-button>
-      <el-button @click="$emit('cancel')">Cancel</el-button>
+      <el-button @click="onCancel">Cancel</el-button>
     </div>
   </div>
 
@@ -91,7 +91,13 @@ export default {
     },
 
     onEnter () {
+      this.focusIndex = 0
       this.$emit('enter')
+    },
+
+    onCancel () {
+      this.focusIndex = 0
+      this.$emit('cancel')
     },
 
     onUp () {

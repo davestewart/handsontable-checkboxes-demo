@@ -133,8 +133,7 @@ export function setValue (state, path, value, create = false) {
     if (!isObject(obj[key]) || !(key in obj)) {
       if (create) {
         obj[key] = {}
-      }
-      else {
+      } else {
         return false
       }
     }
@@ -156,8 +155,7 @@ export function hasValue (obj, path) {
       let key = keys.shift()
       if (key && hasKey(obj, key)) {
         obj = obj[key]
-      }
-      else {
+      } else {
         return false
       }
     }

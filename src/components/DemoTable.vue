@@ -17,7 +17,12 @@ const settings = {
       editor: 'text',
     },
     Columns.settlementDate,
-    Columns.collateral
+    Columns.collateral,
+    {
+      title: 'Delete',
+      type: 'checkbox',
+      data: 'delete',
+    }
   ]
 }
 

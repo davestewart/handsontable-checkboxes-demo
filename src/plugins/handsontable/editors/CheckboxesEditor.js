@@ -34,6 +34,7 @@ export default class CheckboxesEditor extends BaseEditor {
    * Opens the editor and adjust its size.
    */
   open () {
+    this.hot.unlisten()
     this._opened = true
     this.refreshDimensions()
     this.wrapper.style.display = ''
@@ -75,7 +76,7 @@ export default class CheckboxesEditor extends BaseEditor {
     console.log(this.TD)
 
     // vm
-    const ComponentCtor = Vue.extend(Component);
+    const ComponentCtor = Vue.extend(Component)
     const vm = new ComponentCtor({})
       .$mount(mounter)
       .$on('input', this.onInput.bind(this))
@@ -99,11 +100,11 @@ export default class CheckboxesEditor extends BaseEditor {
   }
 
   onEnter () {
-    this.finishEditing(false, true)
+    this.finishEditing(false, true, () => setTimeout(() => this.hot.listen()))
   }
 
   onCancel () {
-    this.finishEditing(true)
+    this.finishEditing(true, false, () => setTimeout(() => this.hot.listen()))
   }
 
   /**
@@ -171,7 +172,6 @@ export default class CheckboxesEditor extends BaseEditor {
     const style = this.wrapper.style
     style.top = this.TD.offsetTop + this.TD.offsetHeight - 1 + 'px'
     style.left = this.TD.offsetLeft - 1 + 'px'
-
   }
 
   /**
@@ -215,5 +215,4 @@ export default class CheckboxesEditor extends BaseEditor {
 
     return editedCell < 0 ? void 0 : editedCell
   }
-
 }
