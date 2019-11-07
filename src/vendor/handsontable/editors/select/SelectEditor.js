@@ -55,7 +55,6 @@ export default class SelectEditor extends TextEditor {
       ? options(this.row, this.col, this.prop)
       : options
 
-    this.editor.clear()
     Object.assign(this.editor, options)
     this.editor.selected = originalValue
   }
@@ -90,6 +89,7 @@ export default class SelectEditor extends TextEditor {
   close () {
     this.wrapper.style.display = 'none'
     this.TEXTAREA.removeEventListener('input', this.onInput)
+    this.editor.clear()
     super.close()
   }
 

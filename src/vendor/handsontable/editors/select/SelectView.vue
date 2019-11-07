@@ -93,13 +93,13 @@ export default {
     input: 'updateOptions',
     focused: 'update',
     selected (value) {
-      this.focused = value
+      this.value = value
     },
   },
 
   methods: {
     update () {
-      const option = this.getOption(this.focused)
+      const option = this.getOption(this.focused) || this.getOption(this.selected)
       this.value = option
         ? option[this.keyValue]
         : ''
@@ -108,8 +108,10 @@ export default {
     updateOptions () {
       const source = this.source
       if (typeof source === 'function') {
+        this.isLoading = true
         source(this.input, options => {
           this.options = options
+          this.isLoading = false
           this.update()
         })
       } else {
