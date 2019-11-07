@@ -55,6 +55,7 @@ export default class SelectEditor extends TextEditor {
       ? options(this.row, this.col, this.prop)
       : options
 
+    this.editor.clear()
     Object.assign(this.editor, options)
     this.editor.selected = originalValue
   }
@@ -68,8 +69,8 @@ export default class SelectEditor extends TextEditor {
     this.editor.input = value
   }
 
-  setFocusIndex (dir) {
-    this.editor.setFocusIndex(dir)
+  setFocus (dir) {
+    this.editor.setFocus(dir)
   }
 
   open (event) {
@@ -109,11 +110,11 @@ export default class SelectEditor extends TextEditor {
       }
 
       if (key === 'ArrowUp') {
-        this.setFocusIndex('-1')
+        this.setFocus(-1)
         return cancel()
       }
       if (key === 'ArrowDown') {
-        this.setFocusIndex('1')
+        this.setFocus(1)
         return cancel()
       }
     }
