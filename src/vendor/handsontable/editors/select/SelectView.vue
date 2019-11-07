@@ -18,7 +18,6 @@
       </template>
       <li v-else class="el-select-dropdown__item">
         <span class="anSelect__item--label">No results</span>
-        <span class="anSelect__item--value">Widen your search</span>
       </li>
     </ul>
   </div>
@@ -74,7 +73,7 @@ export default {
     return {
       value: '',
       options: [],
-      focusIndex: 0,
+      focused: '',
       isLoading: false
     }
   },
@@ -92,12 +91,15 @@ export default {
   watch: {
     source: 'updateOptions',
     input: 'updateOptions',
-    focusIndex: 'update'
+    focused: 'update',
+    selected (value) {
+      this.focused = value
+    },
   },
 
   methods: {
     update () {
-      const option = this.filtered[this.focusIndex]
+      const option = this.getFocused()
       this.value = option
         ? option[this.keyValue]
         : ''
@@ -116,22 +118,56 @@ export default {
       }
     },
 
-    setFocusIndex (index) {
-      this.focusIndex = typeof index === 'string'
-        ? this.focusIndex + (parseInt(index, 10) || 0)
-        : index
-      if (this.focusIndex < 0) {
-        this.focusIndex = this.filtered.length - 1
+    setFocus (value) {
+      // specific item
+      if (typeof value === 'string'){
+        this.focused = value
       }
-      if (this.focusIndex >= this.filtered.length) {
-        this.focusIndex = 0
+
+      // prev / next
+      else if (typeof value === 'number') {
+        // items
+        const filtered = this.filtered
+
+        // no items to focus
+        if (filtered.length === 0) {
+          return
+        }
+
+        // focus something...
+        const option = this.getFocused()
+        let index = filtered.indexOf(option)
+
+        // no currently-focused item
+        if (index === -1) {
+          index = value < 0
+            ? filtered.length - 1
+            : 0
+          this.focused = filtered[index].value
+        }
+
+        // currently-focused
+        else {
+          index += value
+          if (index > filtered.length - 1) {
+            index = 0
+          }
+          if (index < 0) {
+            index = filtered.length - 1
+          }
+          this.focused = filtered[index].value
+        }
       }
+    },
+
+    getFocused () {
+      return this.filtered.find(option => option[this.keyValue] === this.focused)
     },
 
     getOptionClass (option, index) {
       return {
         selected: option.value === this.selected,
-        hover: index === this.focusIndex,
+        hover: option.value === this.focused,
       }
     },
 
@@ -142,7 +178,8 @@ export default {
     clear () {
       this.input = ''
       this.value = ''
-      this.focusIndex = -1
+      this.focused = ''
+      this.selected = ''
     }
 
   }
