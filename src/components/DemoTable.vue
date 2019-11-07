@@ -7,22 +7,13 @@
 
 <script>
 import { clone } from '../utils/object'
-import { Columns, Settings } from '../plugins/handsontable/index'
+import { Columns, Settings } from '../vendor/handsontable/index'
 
 const settings = {
+  minSpareRows: 0,
   columns: [
-    {
-      title: 'ID',
-      data: 'id',
-      editor: 'text',
-    },
-    Columns.settlementDate,
-    Columns.collateral,
-    {
-      title: 'Delete',
-      type: 'checkbox',
-      data: 'delete',
-    }
+    Columns.select,
+    Columns.checkboxes,
   ]
 }
 

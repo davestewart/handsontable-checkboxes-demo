@@ -9,6 +9,12 @@
 <script>
 import DemoTable from './DemoTable'
 
+function field () {
+  return {
+    select: '',
+    checkboxes: '',
+  }
+}
 export default {
   components: {
     DemoTable
@@ -17,9 +23,9 @@ export default {
   data () {
     return {
       data: [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 },
+        field(),
+        field(),
+        field(),
       ],
       updates: [],
     }

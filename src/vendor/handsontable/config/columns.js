@@ -1,25 +1,42 @@
-import config from '../../../config'
+import options from '../../../config'
 
-export const settlementDate = {
-  title: 'Settlement Date',
-  data: 'settlementDate',
-  type: 'date',
-  width: 110,
-  dateFormat: 'YYYY-MM-DD',
-}
-
-export const collateral = {
-  title: 'Collateral Baskets',
-  data: 'collateralBasketIds',
+export const select = {
+  title: 'Select Editor',
+  data: 'select',
   type: 'text',
   width: 150,
-  renderer: 'collateral',
+  renderer: 'text',
+  editor: 'select',
+  editorOptions: function (row, col, prop) {
+    return {
+      keyLabel: 'label',
+      keyValue: 'value',
+      // filter: 'value',
+      source (query, callback) {
+        const result = options.map(item => {
+          return {
+            label: item.name,
+            value: item.code,
+          }
+        })
+        setTimeout(() => callback(result), 500)
+      }
+    }
+  }
+}
+
+export const checkboxes = {
+  title: 'Checkboxes editor',
+  data: 'checkboxes',
+  type: 'text',
+  width: 150,
+  renderer: 'options',
   editor: 'checkboxes',
   editorOptions: function (row, col, prop) {
-    return config.collateral.map(item => {
+    return options.map(item => {
       return {
         label: item.name,
-        value: item.id,
+        value: item.code,
       }
     })
   }
