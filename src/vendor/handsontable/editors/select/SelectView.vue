@@ -1,0 +1,190 @@
+<template>
+
+  <div class="anSelect__list" :data-value-position="'after'">
+    <ul class="el-select-dropdown__list" v-loading="isLoading">
+      <template v-if="filtered.length">
+        <li
+            v-for="(option, index) in filtered"
+            :key="option.value"
+            :label="option.label"
+            :value="option.value"
+            :class="getOptionClass(option, index)"
+            class="el-select-dropdown__item"
+            @mousedown="onOptionClick(option)"
+        >
+          <span class="anSelect__item--label">{{ option[keyLabel] }}</span>
+          <span class="anSelect__item--value">{{ option[keyValue] }}</span>
+        </li>
+      </template>
+      <li v-else class="el-select-dropdown__item">
+        <span class="anSelect__item--label">No results</span>
+        <span class="anSelect__item--value">Widen your search</span>
+      </li>
+    </ul>
+  </div>
+
+</template>
+
+<script>
+export default {
+  props: {
+    input: {
+      type: String,
+      default: '',
+    },
+
+    selected: {
+      type: String,
+      default: '',
+    },
+
+    source: {
+      type: [Array, Function],
+      default () {
+        return [
+          { label: 'No data!', value: '' }
+        ]
+      }
+    },
+
+    keyLabel: {
+      type: String,
+      default: 'label'
+    },
+
+    keyValue: {
+      type: String,
+      default: 'value'
+    },
+
+    filter: {
+      type: String,
+      default: 'label'
+    },
+
+    showValue: {
+      string: 'right',
+      validator (value) {
+        return ['after', 'below'].includes(value)
+      }
+    }
+  },
+
+  data () {
+    return {
+      value: '',
+      options: [],
+      focusIndex: 0,
+      isLoading: false
+    }
+  },
+
+  computed: {
+    filtered () {
+      if (this.filter) {
+        const input = this.input.toLowerCase()
+        return this.options.filter(option => option[this.filter].toLowerCase().includes(input))
+      }
+      return this.options
+    },
+  },
+
+  watch: {
+    source: 'updateOptions',
+    input: 'updateOptions',
+    focusIndex: 'update'
+  },
+
+  methods: {
+    update () {
+      const option = this.filtered[this.focusIndex]
+      this.value = option
+        ? option[this.keyValue]
+        : ''
+    },
+
+    updateOptions () {
+      const source = this.source
+      if (typeof source === 'function') {
+        source(this.input, options => {
+          this.options = options
+          this.update()
+        })
+      } else {
+        this.options = source
+        this.update()
+      }
+    },
+
+    setFocusIndex (index) {
+      this.focusIndex = typeof index === 'string'
+        ? this.focusIndex + (parseInt(index, 10) || 0)
+        : index
+      if (this.focusIndex < 0) {
+        this.focusIndex = this.filtered.length - 1
+      }
+      if (this.focusIndex >= this.filtered.length) {
+        this.focusIndex = 0
+      }
+    },
+
+    getOptionClass (option, index) {
+      return {
+        selected: option.value === this.selected,
+        hover: index === this.focusIndex,
+      }
+    },
+
+    onOptionClick (option) {
+      this.$emit('update', option[this.keyValue])
+    },
+
+    clear () {
+      this.input = ''
+      this.value = ''
+      this.focusIndex = -1
+    }
+
+  }
+}
+</script>
+
+<style lang="scss">
+.anSelect {
+
+  &__container {
+    position: absolute;
+    z-index: 9999;
+    width: auto;
+    border: 1px solid #DDD;
+    border-top: none;
+    background: white;
+    box-shadow: 0 5px 10px #00000022;
+  }
+
+  &__item--value {
+    color: #AAA;
+    display: none;
+  }
+
+  &__list[data-value-position="after"] &__item--value {
+    display: block;
+    float: right;
+    padding-left: 20px
+  }
+
+  &__list[data-value-position="below"] {
+
+    .el-select-dropdown__item {
+      height: 50px;
+    }
+
+    .anSelect__item--value {
+      display: block;
+      font-size: 0.8em;
+      line-height: 0.7em;
+    }
+  }
+
+}
+</style>
