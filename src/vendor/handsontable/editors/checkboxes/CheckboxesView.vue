@@ -20,7 +20,7 @@
     </el-checkbox-group>
     <hr>
     <div class="button-holder">
-      <el-button @click="onEnter" type="primary">Update All</el-button>
+      <el-button @click="onEnter" type="primary">Update</el-button>
       <el-button @click="onCancel">Cancel</el-button>
     </div>
   </div>

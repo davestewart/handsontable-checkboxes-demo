@@ -10,55 +10,7 @@ import Component from './CheckboxesView'
  */
 export default class CheckboxesEditor extends BaseEditor {
   // wrapper
-  // vm
-
-  /**
-   * Returns select's value.
-   *
-   * @returns {*}
-   */
-  getValue () {
-    return JSON.stringify(this.vm.output)
-  }
-
-  /**
-   * Sets value in the select element.
-   *
-   * @param {*} value A new select's value.
-   */
-  setValue (value) {
-    this.vm.value = JSON.parse(value || '[]')
-  }
-
-  /**
-   * Opens the editor and adjust its size.
-   */
-  open () {
-    this.hot.unlisten()
-    this._opened = true
-    this.refreshDimensions()
-    this.wrapper.style.display = ''
-    this.vm.focus()
-    // this.addHook('beforeKeyDown', () => this.onBeforeKeyDown())
-  }
-
-  /**
-   * Closes the editor.
-   */
-  close () {
-    this._opened = false
-    this.vm.value = []
-    this.wrapper.style.display = 'none'
-    this.clearHooks()
-  }
-
-  /**
-   * Sets focus state on the select element.
-   */
-  focus () {
-    // not needed
-    // this.select.focus()
-  }
+  // editor
 
   /**
    * Initializes editor instance, DOM Element and mount hooks.
@@ -75,9 +27,9 @@ export default class CheckboxesEditor extends BaseEditor {
 
     console.log(this.TD)
 
-    // vm
+    // editor
     const ComponentCtor = Vue.extend(Component)
-    const vm = new ComponentCtor({})
+    const editor = new ComponentCtor({})
       .$mount(mounter)
       .$on('input', this.onInput.bind(this))
       .$on('enter', this.onEnter.bind(this))
@@ -85,26 +37,14 @@ export default class CheckboxesEditor extends BaseEditor {
 
     // class properties
     this.wrapper = wrapper
-    this.vm = vm
+    this.editor = editor
 
     // debug
-    window.vm = vm
+    window.editor = editor
 
     // mount etc
     this.hot.rootElement.appendChild(wrapper)
     this.registerHooks()
-  }
-
-  onInput (value) {
-    this.getEditedCell().focus()
-  }
-
-  onEnter () {
-    this.finishEditing(false, true, () => setTimeout(() => this.hot.listen()))
-  }
-
-  onCancel () {
-    this.finishEditing(true, false, () => setTimeout(() => this.hot.listen()))
   }
 
   /**
@@ -134,9 +74,71 @@ export default class CheckboxesEditor extends BaseEditor {
 
     // options
     const editorOptions = this.cellProperties.editorOptions
-    this.vm.options = typeof editorOptions === 'function'
+    this.editor.options = typeof editorOptions === 'function'
       ? editorOptions(this.row, this.col, this.prop)
       : editorOptions
+  }
+
+  /**
+   * Sets value in the select element.
+   *
+   * @param {*} value A new select's value.
+   */
+  setValue (value) {
+    this.editor.value = value
+      ? String(value || '').split('|')
+      : []
+  }
+
+  /**
+   * Returns editor's value.
+   *
+   * @returns {*}
+   */
+  getValue () {
+    return Array.from(this.editor.output).join('|')
+  }
+
+  /**
+   * Opens the editor and adjust its size.
+   */
+  open () {
+    this.hot.unlisten()
+    this._opened = true
+    this.refreshDimensions()
+    this.wrapper.style.display = ''
+    this.editor.focus()
+    // this.addHook('beforeKeyDown', () => this.onBeforeKeyDown())
+  }
+
+  /**
+   * Closes the editor.
+   */
+  close () {
+    this._opened = false
+    this.editor.value = []
+    this.wrapper.style.display = 'none'
+    this.clearHooks()
+  }
+
+  /**
+   * Sets focus state on the select element.
+   */
+  focus () {
+    // not needed
+    // this.select.focus()
+  }
+
+  onInput (value) {
+    this.getEditedCell().focus()
+  }
+
+  onEnter () {
+    this.finishEditing(false, true, () => setTimeout(() => this.hot.listen()))
+  }
+
+  onCancel () {
+    this.finishEditing(true, false, () => setTimeout(() => this.hot.listen()))
   }
 
   /**

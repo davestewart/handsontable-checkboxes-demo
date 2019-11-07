@@ -11,12 +11,12 @@ import Settings from './config/settings.js'
 import * as Columns from './config/columns.js'
 
 // grid
-import CheckboxesEditor from './editors/CheckboxesEditor'
-import CollateralRenderer from './renderers/CollateralRenderer'
+import CheckboxesEditor from './editors/checkboxes/CheckboxesEditor'
+import OptionsRenderer from './renderers/OptionsRenderer'
 
 // renderers
 Handsontable.editors.registerEditor('checkboxes', CheckboxesEditor)
-Handsontable.renderers.registerRenderer('collateral', CollateralRenderer)
+Handsontable.renderers.registerRenderer('options', OptionsRenderer)
 
 // table
 Vue.component('hot-table', HotTable)
