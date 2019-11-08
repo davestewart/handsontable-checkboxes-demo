@@ -1,6 +1,6 @@
 import Handsontable from 'handsontable'
-import TextEditor from 'handsontable/es/editors/textEditor'
 import { EditorState } from 'handsontable/es/editors/_baseEditor'
+import TextEditor from 'handsontable/es/editors/textEditor'
 // import { isMetaKey } from 'handsontable/es/helpers/unicode'
 // import { addClass } from 'handsontable/es/helpers/dom/element'
 import Vue from 'vue'
@@ -17,13 +17,37 @@ export default class SelectEditor extends TextEditor {
     this.onInput = this.onInput.bind(this)
     this.onUpdate = this.onUpdate.bind(this)
     this.setValue = this.setValue.bind(this)
+    this.clear = this.clear.bind(this)
   }
 
   createElements () {
     super.createElements()
+    this.addInput()
+    this.addClear()
     this.addWrapper()
     this.addView()
     this.wrapper.style.display = 'none'
+  }
+
+  addInput () {
+    this.TEXTAREA = document.createElement('input')
+    this.TEXTAREA.tabIndex = -1
+    this.TEXTAREA.className = 'handsontableInput'
+    Object.assign(this.TEXTAREA.style, {
+      width: 0,
+      height: 0,
+      overflow: 'hidden',
+    })
+    this.TEXTAREA_PARENT.innerHTML = ''
+    this.TEXTAREA_PARENT.appendChild(this.TEXTAREA)
+  }
+
+  addClear () {
+    const close = document.createElement('span')
+    close.className = 'anSelect__clear'
+    close.innerHTML = ''
+    close.addEventListener('click', this.clear)
+    this.TEXTAREA_PARENT.appendChild(close)
   }
 
   addWrapper () {
@@ -31,7 +55,7 @@ export default class SelectEditor extends TextEditor {
     wrapper.className = 'anSelect__container'
     Object.assign(wrapper.style, {
       top: 0,
-      left: 0,
+      left: 0
     })
     document.body.appendChild(this.wrapper)
   }
@@ -70,6 +94,11 @@ export default class SelectEditor extends TextEditor {
 
   setFocus (dir) {
     this.editor.setFocus(dir)
+  }
+
+  clear () {
+    this.setValue('')
+    this.editor.selected = ''
   }
 
   open (event) {

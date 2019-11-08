@@ -58,7 +58,7 @@ export default {
 
     filter: {
       type: String,
-      default: 'label'
+      default: 'value'
     },
 
     showValue: {
@@ -199,6 +199,27 @@ export default {
     border-top: none;
     background: white;
     box-shadow: 0 5px 10px #00000022;
+  }
+
+  &__clear {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 7px;
+    font-weight: bold;
+    color: #DDDDDD;
+    &:hover {
+      color: black;
+    }
+    &:after {
+      content: '×';
+      height: 20px;
+      width: 14px;
+      font-size: 20px;
+      line-height: 20px;
+      display: block;
+      text-align: center;
+    }
   }
 
   &__item--value {
